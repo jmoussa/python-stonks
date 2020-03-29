@@ -3,11 +3,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import style
 
-style.use('ggplot')
+style.use("ggplot")
 
 
 def visualize_data():
-    df = pd.read_csv('sp500_joined_closes.csv', parse_dates=True)
+    df = pd.read_csv("./csvs/sp500_joined_closes.csv", parse_dates=True)
     # df['AAPL'].plot()
     # plt.show()
     # Correlation table df
@@ -38,5 +38,5 @@ def visualize_data():
     plt.show()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     visualize_data()
