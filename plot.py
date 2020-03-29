@@ -1,3 +1,7 @@
+"""
+    Plots moving averages and volume of a user specified stock on the S&P 500
+"""
+
 from utils import download_ticker, plot_ma  # plot_candlestick
 import sys
 import argparse

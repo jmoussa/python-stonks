@@ -1,3 +1,8 @@
+"""
+    Generates correlation heatmap for all companies of the S&P 500
+    Used to check which companies may have relationships/trends when it comes to stock price
+"""
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
