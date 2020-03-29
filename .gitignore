@@ -1,0 +1,4 @@
+tmp/
+*.pickle
+.vim/
+__pycache__/
