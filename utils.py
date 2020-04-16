@@ -40,7 +40,7 @@ def read_ticker(filename):
 def plot_ma(df, ticker_name):
     df["200 MA"] = df["Adj Close"].rolling(window=200, min_periods=0).mean()
     df["100 MA"] = df["Adj Close"].rolling(window=100, min_periods=0).mean()
-    df["20 MA"] = df["Adj Close"].rolling(window=20, min_periods=0).mean()
+    df["50 MA"] = df["Adj Close"].rolling(window=50, min_periods=0).mean()
     df.dropna(inplace=True)
 
     # print(df.head())
@@ -48,7 +48,7 @@ def plot_ma(df, ticker_name):
     ax1.plot(df.index, df["Adj Close"])
     ax1.plot(df.index, df["200 MA"], label="200MA")
     ax1.plot(df.index, df["100 MA"], label="100MA")
-    ax1.plot(df.index, df["20 MA"], label="20MA")
+    ax1.plot(df.index, df["50 MA"], label="50MA")
     ax1.set_title(f"{ticker_name} Moving Averages")
 
     ax2.bar(df.index, df["Volume"])
