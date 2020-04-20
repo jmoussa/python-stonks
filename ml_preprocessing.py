@@ -1,7 +1,9 @@
 import sys
+import logging
 import numpy as np
 import pandas as pd
 import argparse
+import coloredlogs
 
 from collections import Counter
 from sklearn.model_selection import train_test_split
@@ -11,6 +13,12 @@ from sklearn.ensemble import VotingClassifier, RandomForestClassifier
 days_in_future = 14
 percent_change = 0.05
 moving_avg_days = 100
+
+coloredlogs.install(level="DEBUG", fmt="%(asctime)s %(hostname)s %(name)s %(message)s")
+FORMAT = "%(asctime)s - %(levelname)s: %(message)s"
+logging.basicConfig(format=FORMAT)
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
 
 
 # classification
@@ -55,7 +63,7 @@ def extract_featuresets(ticker):
 
     vals = df[f"{ticker}_target"].values.tolist()
     str_vals = [str(i) for i in vals]
-    print(f"Data Spread: {Counter(str_vals)}")
+    logger.info(f"Data Spread: {Counter(str_vals)}")
 
     df.fillna(0, inplace=True)
     df = df.replace([np.inf, -np.inf], np.nan)
@@ -96,23 +104,23 @@ def do_ml(ticker, test_ticker=None):
 
     # check how well it fits
     confidence = clf.score(X_test, y_test)
-    print(f"{ticker} Trained Confidence: {confidence}")
+    logger.info(f"{ticker} Trained Confidence: {confidence}")
 
     # Make prediction
     predictions = clf.predict(X_test)
-    print(f"{ticker} Predicted spread: {Counter(predictions)}")
+    logger.info(f"{ticker} Predicted spread: {Counter(predictions)}")
 
     if test_ticker is not None:
-        print(f"TESTING on {test_ticker}")
+        logger.info(f"TESTING on {test_ticker}")
         X, y, df = extract_featuresets(test_ticker)
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.9)
 
         confidence = clf.score(X_test, y_test)
-        print(f"{test_ticker} Testing Confidence: {confidence}")
+        logger.info(f"{test_ticker} Testing Confidence: {confidence}")
 
         # Make prediction
         predictions = clf.predict(X_test)
-        print(f"{test_ticker} Predicted spread: {Counter(predictions)}")
+        logger.info(f"{test_ticker} Predicted spread: {Counter(predictions)}")
         return len(predictions)
     else:
         return len(predictions)
@@ -125,7 +133,7 @@ def parse_arguments():
     args = parser.parse_args()
 
     if args.train_ticker is None:
-        raise parser.print_help(sys.stderr)
+        raise parser.logger.info_help(sys.stderr)
 
     return args
 
@@ -133,4 +141,4 @@ def parse_arguments():
 if __name__ == "__main__":
     args = parse_arguments()
     prediction_count = do_ml(args.train_ticker, args.test_ticker)
-    print(f"Prediction Count: {prediction_count}")
+    logger.info(f"Prediction Count: {prediction_count}")
