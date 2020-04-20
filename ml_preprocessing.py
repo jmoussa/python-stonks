@@ -96,7 +96,7 @@ def do_ml(ticker, test_ticker=None):
 
     # check how well it fits
     confidence = clf.score(X_test, y_test)
-    print(f"{ticker} Confidence: {confidence}")
+    print(f"{ticker} Trained Confidence: {confidence}")
 
     # Make prediction
     predictions = clf.predict(X_test)
@@ -108,7 +108,7 @@ def do_ml(ticker, test_ticker=None):
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.9)
 
         confidence = clf.score(X_test, y_test)
-        print(f"{test_ticker} Confidence: {confidence}")
+        print(f"{test_ticker} Testing Confidence: {confidence}")
 
         # Make prediction
         predictions = clf.predict(X_test)
@@ -132,5 +132,5 @@ def parse_arguments():
 
 if __name__ == "__main__":
     args = parse_arguments()
-    predition_count = do_ml(args.train_ticker, args.test_ticker)
-    print(predition_count)
+    prediction_count = do_ml(args.train_ticker, args.test_ticker)
+    print(f"Prediction Count: {prediction_count}")
