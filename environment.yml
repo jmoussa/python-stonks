@@ -96,5 +96,4 @@ dependencies:
     - cycler==0.10.0
     - mpl-finance==0.10.0
     - mplfinance==0.12.0a3
-prefix: /Users/jmoussa/anaconda3/envs/finance
 
