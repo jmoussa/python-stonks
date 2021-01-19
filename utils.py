@@ -7,7 +7,9 @@ import matplotlib.pyplot as plt
 from matplotlib import style
 import pandas as pd
 import pandas_datareader.data as web
-import os
+import logging
+
+logger = logging.getLogger(__name__)
 
 style.use("ggplot")
 ax1 = plt.subplot2grid((6, 1), (0, 0), rowspan=5, colspan=1)
@@ -16,18 +18,14 @@ ax2 = plt.subplot2grid((6, 1), (5, 0), rowspan=1, colspan=1, sharex=ax1)
 
 def download_ticker(full_path=None, ticker="DIS"):
     print("Ticker: ", ticker)
-    start = dt.datetime(2010, 1, 1)
+    start = dt.datetime(2009, 1, 1)
     end = dt.datetime.now()
-
-    df = web.DataReader(ticker, "yahoo", start, end)
-    # df = web.get_data_yahoo(ticker, start, end)
-    if full_path is None:
-        if not os.path.exists("./tmp"):
-            os.mkdir("./tmp")
-        full_path = os.path.join("./tmp/", f"{ticker}.{start.strftime('%Y%m%d')}.{end.strftime('%Y%m%d')}.csv")
-
-    df.to_csv(full_path)
-    return df, ticker
+    try:
+        df = web.DataReader(ticker, "yahoo", start, end)
+        return df
+    except KeyError as e:
+        logger.error(f"Key Error: {e} for {ticker}")
+        return pd.DataFrame()
 
 
 def read_ticker(filename):
@@ -40,9 +38,6 @@ def plot_ma(df, ticker_name):
     df["100 MA"] = df["Adj Close"].rolling(window=100, min_periods=0).mean()
     df["50 MA"] = df["Adj Close"].rolling(window=50, min_periods=0).mean()
     df.dropna(inplace=True)
-
-    # print(df.head())
-
     ax1.plot(df.index, df["Adj Close"])
     ax1.plot(df.index, df["200 MA"], label="200MA")
     ax1.plot(df.index, df["100 MA"], label="100MA")

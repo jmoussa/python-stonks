@@ -12,15 +12,18 @@ dependencies:
   - beautifulsoup4=4.8.2=py37_0
   - black=19.10b0=py_0
   - blas=1.0=mkl
-  - ca-certificates=2019.11.28=hecc5488_0
-  - certifi=2019.11.28=py37hc8dfbb8_1
+  - ca-certificates=2020.1.1=0
+  - certifi=2020.4.5.1=py37_0
   - cffi=1.13.2=py37hb5b8e2f_0
   - chardet=3.0.4=py37_1003
   - click=7.0=py37_0
+  - coloredlogs=10.0=py37_0
   - cryptography=2.8=py37ha12b0ac_0
   - decorator=4.4.2=py_0
+  - flake8=3.7.9=py37_0
   - freetype=2.9.1=hb4e5f40_0
   - greenlet=0.4.15=py37h9bfed18_1
+  - humanfriendly=6.1=py37_0
   - icu=58.2=h4b95b61_1
   - idna=2.8=py37_0
   - intel-openmp=2019.4=233
@@ -40,8 +43,6 @@ dependencies:
   - libxslt=1.1.33=h33a18ac_0
   - llvm-openmp=4.0.1=hcfea43d_1
   - lxml=4.5.0=py37hef8c89e_0
-  - matplotlib=3.1.3=py37_0
-  - matplotlib-base=3.1.3=py37h9aa3819_0
   - mkl=2019.4=233
   - mkl-service=2.3.0=py37hfbe908c_0
   - mkl_fft=1.0.15=py37h5e564d8_0
@@ -52,7 +53,7 @@ dependencies:
   - neovim=0.3.1=py37_0
   - numpy=1.18.1=py37h7241aed_0
   - numpy-base=1.18.1=py37h6575580_1
-  - openssl=1.1.1d=h0b31af3_0
+  - openssl=1.1.1f=h1de35cc_0
   - pandas=1.0.0=py37h6c726b0_0
   - pandas-datareader=0.8.1=py_0
   - parso=0.6.1=py_0
@@ -63,6 +64,7 @@ dependencies:
   - prompt_toolkit=3.0.3=py_0
   - ptyprocess=0.6.0=py37_0
   - pycparser=2.19=py37_0
+  - pyflakes=2.1.1=py37_0
   - pygments=2.5.2=py_0
   - pynvim=0.4.1=py37_0
   - pyopenssl=19.1.0=py37_0
@@ -94,6 +96,11 @@ dependencies:
   - zlib=1.2.11=h1de35cc_3
   - pip:
     - cycler==0.10.0
+    - entrypoints==0.3
+    - matplotlib==3.3.3
+    - mccabe==0.6.1
     - mpl-finance==0.10.0
     - mplfinance==0.12.0a3
-
+    - pillow==8.1.0
+    - pycodestyle==2.5.0
+prefix: /Users/jmoussa/anaconda3/envs/finance
