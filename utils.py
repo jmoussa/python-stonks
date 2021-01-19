@@ -5,8 +5,6 @@
 import datetime as dt
 import matplotlib.pyplot as plt
 from matplotlib import style
-from mpl_finance import candlestick_ohlc
-import matplotlib.dates as mdates
 import pandas as pd
 import pandas_datareader.data as web
 import os
@@ -53,21 +51,4 @@ def plot_ma(df, ticker_name):
 
     ax2.bar(df.index, df["Volume"])
     ax1.legend()
-    plt.show()
-
-
-def plot_candlestick(df, ticker_name):
-    ax1.xaxis_date()
-
-    # resample to broader data spectrum
-    # open, high, low, close of adj close 10 days & total volume every 10 days
-    df_ohlc = df["Adj Close"].resample("10D").ohlc()
-    df_volume = df["Volume"].resample("10D").sum()
-
-    # convert date from index to column
-    df_ohlc.reset_index(inplace=True)
-    df_ohlc["Date"] = df_ohlc["Date"].map(mdates.date2num)
-
-    candlestick_ohlc(ax1, df_ohlc.values, width=2, colorup="g")
-    ax2.fill_between(df_volume.index.map(mdates.date2num), df_volume.values, 0)
     plt.show()
